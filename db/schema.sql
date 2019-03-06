@@ -21,7 +21,7 @@ CREATE TABLE bills
 	amount integer(100) NOT NULL,
     bill_date timestamp,
 	category varchar(255) NOT NULL,
-	spent_in integer(100) NOT NULL,
+	spent_at integer(100) NOT NULL,
 	remarks varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );
