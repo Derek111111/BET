@@ -5,6 +5,8 @@
 // Dependencies
 // =============================================================
 var path = require("path");
+var db = require("../models");
+
 
 // Routes
 // =============================================================
@@ -14,11 +16,21 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/blog.html"));
-  });
+    db.Category.findAll({}).then(function(dbCategory) {
+      //res.json(dbCategory);
+      var expenseObject = {
+        categoriess: dbCategory
+      };
+      alert("-----"+expenseObject);
+      res.render("index", expenseObject);
+    });
+      
+    });
+    res.sendFile(path.join("index", expenseObject));
+  
 
   // cms route loads cms.html
-  app.get("/cms", function(req, res) {
+/* app.get("/cms", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
@@ -30,6 +42,6 @@ module.exports = function(app) {
   // authors route loads author-manager.html
   app.get("/authors", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/author-manager.html"));
-  });
+  });*/
 
 };
