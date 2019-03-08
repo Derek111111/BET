@@ -16,12 +16,56 @@ $(function() {
         alert(date1);
     
         // Send the POST request.
-        $.ajax("/api/expense", {
+        $.ajax("/expense", {
           type: "POST",
           data: newExpense
         }).then(
           function() {
             console.log("created new Expense");
+            // Reload the page to get the updated list
+            location.reload();
+          }
+        );
+      });
+      $(document).on("click","expense",function(event) {
+        // Make sure to preventDefault on a submit event.
+        
+        // Send the POST request.
+          $.ajax("/expense", {
+          type: "GET",
+        }).then(
+          function() {
+            console.log("created new Expense");
+            // Reload the page to get the updated list
+            location.reload();
+          }
+        );
+      });
+
+      $(document).on("click","reports",function(event) {
+        // Make sure to preventDefault on a submit event.
+        
+        // Send the POST request.
+          $.ajax("/reports", {
+          type: "GET",
+        }).then(
+          function() {
+            console.log("created new Report");
+            // Reload the page to get the updated list
+            location.reload();
+          }
+        );
+      });
+      
+      $(document).on("click","income",function(event) {
+        // Make sure to preventDefault on a submit event.
+        
+        // Send the POST request.
+          $.ajax("/income", {
+          type: "GET",
+        }).then(
+          function() {
+            console.log("created new Income Entry");
             // Reload the page to get the updated list
             location.reload();
           }
