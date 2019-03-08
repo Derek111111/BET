@@ -1,21 +1,50 @@
 var express = require("express");
 
 var router = express.Router();
+var connection = require("../config/connection.js");
+var bet = require("../models/bet.js");
+
 
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-  cat.all(function(data) {
+ /* bet.all(function(data) {
     var hbsObject = {
       cats: data
     };
     console.log(hbsObject);
-    res.render("index", hbsObject);
+     });*/
+     res.render("dashboard");
+});
+
+router.get("/expense", function(req, res) {
+  connection.query("SELECT * FROM category;", function(err, data) {
+    if (err) {
+      return res.status(500).end();
+    }
+
+    res.render("index", { categories: data });
   });
 });
 
-router.post("/api/expense", function(req, res) {
-  cat.create(["name", "sleepy"], [req.body.name, req.body.sleepy], function(result) {
+router.get("/reports", function(req, res) {
+  //var condition = "id = " + req.params.id;
+  var condition = " 1";
+  //console.log("condition" +condition);
+  bet.all(condition,function(data) {
+    var hbsObject = {
+      reports: data
+    };
+    console.log(hbsObject);
+    res.render("reports",hbsObject);
+    });
+  
+});
+
+router.post("/expense", function(req, res) {
+  var createdAt = new Date();
+  var updatedAt = new Date();
+  bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","updatedAt"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,updatedAt], function(result) {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
   });
@@ -26,7 +55,7 @@ router.put("/api/cats/:id", function(req, res) {
 
   console.log("condition", condition);
 
-  cat.update(
+  bet.update(
     {
       sleepy: req.body.sleepy
     },

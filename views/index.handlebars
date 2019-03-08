@@ -28,10 +28,10 @@
     <div class="col-sm-3 sidenav hidden-xs">
       <h2>Logo</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Dashboard</a></li>
-        <li><a href="#section2">Expense</a></li>
-        <li><a href="#section3">Update-Income</a></li>
-        <li><a href="#section3">Reports</a></li>
+        <li class="active"><a href="/">Dashboard</a></li>
+        <li class="expense"><a href="/expense"  id="expense">Expense</a></li>
+        <li class="income"><a href="/income" id="income">Update-Income</a></li>
+        <li class="reports"><a href="/reports" id="report">Reports</a></li>
       </ul><br>
     </div>
     <br>
@@ -48,11 +48,11 @@
             <div class="form-group row">
                 <label for="categories" class="col-sm-2 col-form-label">Category</label>
                 <div class="col-sm-6">
-                    <input type="text" list="categories" name="category" id="category">
+                    <input type="text" class="form-control" list="categories" name="category" id="category">
                     <datalist id="categories">
                     
-                        {{#each categoriess}}
-                        <option value={{this.category_name}}>
+                        {{#each categories}}
+                        <option value="{{this.category_name}}">
                         {{/each}}
 
                   </datalist>
