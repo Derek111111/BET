@@ -4,17 +4,15 @@ var router = express.Router();
 var connection = require("../config/connection.js");
 var bet = require("../models/bet.js");
 
-
+var reportdata;
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
- /* bet.all(function(data) {
-    var hbsObject = {
-      cats: data
+
+     var hbsObject = {
+      hbhome:true
     };
-    console.log(hbsObject);
-     });*/
-     res.render("dashboard");
+     res.render("index", hbsObject);
 });
 
 router.get("/expense", function(req, res) {
@@ -22,23 +20,56 @@ router.get("/expense", function(req, res) {
     if (err) {
       return res.status(500).end();
     }
-
-    res.render("index", { categories: data });
+    var hbsObject = {
+      expense: data,
+      hbexpense:true
+    };
+    res.render("index", hbsObject);
   });
 });
 
-router.get("/reports", function(req, res) {
-  //var condition = "id = " + req.params.id;
-  var condition = " 1";
-  //console.log("condition" +condition);
-  bet.all(condition,function(data) {
+router.get("/income", function(req, res) {
+  
     var hbsObject = {
-      reports: data
+      //income: data,
+      hbincome:true
+    };
+    res.render("index", hbsObject);
+ 
+});
+
+router.get("/reports", function(req, res) {
+  
+    var hbsObject = {
+      hbreportsform:true
     };
     console.log(hbsObject);
-    res.render("reports",hbsObject);
-    });
+    res.render("index",hbsObject);
+    
+});
+
+
+router.post("/reports", function(req, res) {
+
+  var condition =  " WHERE createdAt between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.body.id + " Order By category desc";
   
+  //var condition =  " WHERE createdAt between  '2019-03-06 16:01:47' and '2019-03-07 16:01:47' and Uid= 2 Order By category desc";
+  
+  bet.all(condition,function(data) {
+    /*var hbsObject = {
+      reports: data,
+      hbreports:true
+      
+    };*/
+    //reportdata=data;
+    //res.setHeader('Content-type', 'text/html');
+    //console.log(hbsObject);
+    //res.redirect("/reports/user");
+    //res.render("reports",hbsObject);
+    res.json({data});
+   //  res.json({ id: data.insertId });
+    console.log("*********");
+    });
 });
 
 router.post("/expense", function(req, res) {
@@ -70,6 +101,18 @@ router.put("/api/cats/:id", function(req, res) {
     }
   );
 });
+
+/*router.get("/reports/user", function(req, res) {
+  console.log(req.query);
+  var hbsObject = {
+    reports: req.query.data[0],
+    hbreports:true
+    
+  };
+  console.log(hbsObject);
+  res.render("index",hbsObject);
+  
+});*/
 
 // Export routes for server.js to use.
 module.exports = router;

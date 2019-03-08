@@ -35,7 +35,7 @@
       </ul><br>
     </div>
     <br>
-    
+    {{#if hbexpense }}
     <div class="col-sm-9 formData">
        
           <form class="needs-validation dataForm" novalidate>
@@ -51,7 +51,7 @@
                     <input type="text" class="form-control" list="categories" name="category" id="category">
                     <datalist id="categories">
                     
-                        {{#each categories}}
+                        {{#each expense}}
                         <option value="{{this.category_name}}">
                         {{/each}}
 
@@ -111,6 +111,77 @@
           </script>
       
   </div>
+  {{/if}}
+  {{#if hbincome }}
+    <h1>Update Income</h1>
+    <div class="col-sm-9 formData">
+       
+          <form class="needs-validation incomeForm" novalidate>
+            <div class="form-group row">
+              <label for="income" class="col-sm-2 col-form-label">Enter Income</label>
+              <div class="col-sm-6">
+              <input type="text" class="form-control" id="income" placeholder="Enter new Income" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary">Update Income</button>
+            </div>
+            </div>
+            </form>
+            </div>
+  {{/if}}
+
+  
+    {{#if hbreportsform}}
+    <div class="col-sm-9 formData">
+          <form class="needs-validation reportsForm" novalidate>
+            <div class="form-group row">
+                <label for="firstDate" class="col-sm-2 col-form-label">First Date</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" id="firstDate" placeholder="Enter First Date" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="secondDate" class="col-sm-2 col-form-label">Second Date</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" id="secondDate" placeholder="Enter Second Date" required>
+                </div>
+              </div>
+              <div class="form-group row">
+              <div class="col-sm-6">
+                <button type="button" class="btn btn-primary reportBtn">Submit</button>
+              </div>
+            </div>
+            
+            </form>
+            </div>
+    {{/if}}
+      <canvas id="myChart" width="400" height="400"></canvas>
+      {{#if hbreports}}
+      <h1>Reports</h1>
+    
+    
+    <table>
+        <tr>
+           <th>spentAt</th>
+           <th>Amount</th>
+        </tr>
+        
+    {{#each reports}}
+              
+                <tr>
+                
+                 <td>{{spentAt}}</td>
+                <td>{{amount}} </td>
+                </tr>
+
+   
+    {{/each}}
+    
+    </table>
+    {{/if}}
+
 </div>
 </div>
 <footer class="container-fluid text-center">

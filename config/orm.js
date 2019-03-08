@@ -44,7 +44,6 @@ var orm = {
   all: function(tableInput, condition,cb) {
     
     var queryString = "SELECT * FROM " + tableInput ;
-    queryString += " WHERE Uid =";
     queryString += condition + ";";
     console.log(queryString);
 

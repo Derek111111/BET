@@ -36,7 +36,13 @@ color: #ffffff;
 #myNavbar{
     color:#f1f1f1;
 }
-    
+table{
+  margin-right: 20px;
+}
+table,tr,td,th{
+  border: solid;
+  padding:20px;
+}
 /* On small screens, set height to 'auto' for the grid */
 @media screen and (max-width: 767px) {
   .row.content {height: auto;} 
