@@ -25,5 +25,5 @@ var bet = {
   }
 };
 
-// Export the database functions for the controller (expenseController.js).
+// Export the database functions for the controller (catsController.js).
 module.exports = bet;
