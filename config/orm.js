@@ -43,8 +43,36 @@ function objToSql(ob) {
 var orm = {
   all: function(tableInput, condition,cb) {
     
-    var queryString = "SELECT * FROM " + tableInput ;
-    queryString += condition + ";";
+    
+      var queryString = "SELECT * FROM " + tableInput ;
+      queryString += condition + ";";
+      console.log(queryString);
+   
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+  allCategory: function(tableInput,cb) {
+    
+    
+    var queryString = "SELECT * FROM " + tableInput + ";";
+    console.log(queryString);
+ 
+  connection.query(queryString, function(err, result) {
+    if (err) {
+      throw err;
+    }
+    cb(result);
+  });
+},
+
+  findOne: function(tableInput,columns, condition,cb) {
+    
+    var queryString = "SELECT " + columns + " FROM " + tableInput ;
+    queryString += condition;
     console.log(queryString);
 
     connection.query(queryString, function(err, result) {
