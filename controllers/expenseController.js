@@ -4,7 +4,6 @@ var router = express.Router();
 var connection = require("../config/connection.js");
 var bet = require("../models/bet.js");
 
-var reportdata;
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
@@ -15,8 +14,22 @@ router.get("/", function(req, res) {
      res.render("index", hbsObject);
 });
 
+router.get("/dashboard", function(req, res) {
+  var condition = " WHERE Uid = 1";
+  bet.all(condition,function(data) {
+    
+    var hbsObject = {
+      user: data,
+      hbdashboard:true
+    };
+    res.render("index", hbsObject);
+    //res.json(data)
+ 
+  });
+});
+
 router.get("/expense", function(req, res) {
-  connection.query("SELECT * FROM category;", function(err, data) {
+  /*connection.query("SELECT * FROM category;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
@@ -25,6 +38,15 @@ router.get("/expense", function(req, res) {
       hbexpense:true
     };
     res.render("index", hbsObject);
+  });*/
+  var condition = " ";
+  bet.all(condition,function(data) {
+    var hbsObject = {
+      expense: data,
+      hbexpense:true
+    };
+    res.render("index", hbsObject);
+ 
   });
 });
 
@@ -53,22 +75,9 @@ router.post("/reports", function(req, res) {
 
   var condition =  " WHERE createdAt between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.body.id + " Order By category desc";
   
-  //var condition =  " WHERE createdAt between  '2019-03-06 16:01:47' and '2019-03-07 16:01:47' and Uid= 2 Order By category desc";
-  
   bet.all(condition,function(data) {
-    /*var hbsObject = {
-      reports: data,
-      hbreports:true
-      
-    };*/
-    //reportdata=data;
-    //res.setHeader('Content-type', 'text/html');
-    //console.log(hbsObject);
-    //res.redirect("/reports/user");
-    //res.render("reports",hbsObject);
-    res.json({data});
-   //  res.json({ id: data.insertId });
-    console.log("*********");
+      res.json({data});
+   
     });
 });
 
@@ -76,12 +85,12 @@ router.post("/expense", function(req, res) {
   var createdAt = new Date();
   var updatedAt = new Date();
   bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","updatedAt"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,updatedAt], function(result) {
-    // Send back the ID of the new quote
+    // Send back the ID 
     res.json({ id: result.insertId });
   });
 });
 
-router.put("/api/cats/:id", function(req, res) {
+router.put("/api/expense/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
   console.log("condition", condition);
