@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 var connection = require("../config/connection.js");
 var bet = require("../models/bet.js");
+var moment = require("moment");
 
 
 // Create all our routes and set up logic within those routes where required.
@@ -22,8 +23,8 @@ router.get("/dashboard", function(req, res) {
       user: data,
       hbdashboard:true
     };
-    res.render("index", hbsObject);
-    //res.json(data)
+    //res.render("index", hbsObject);
+    res.json(data);
  
   });
 });
@@ -39,12 +40,13 @@ router.get("/expense", function(req, res) {
     };
     res.render("index", hbsObject);
   });*/
-  var condition = " ";
-  bet.all(condition,function(data) {
+  
+  bet.allCategory(function(data) {
     var hbsObject = {
       expense: data,
       hbexpense:true
     };
+    //console.log(JSON.stringify(data));
     res.render("index", hbsObject);
  
   });
@@ -73,9 +75,10 @@ router.get("/reports", function(req, res) {
 
 router.post("/reports", function(req, res) {
 
-  var condition =  " WHERE createdAt between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.body.id + " Order By category desc";
+  var condition =  " WHERE createdAt between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.body.id + " group By category";
   
-  bet.all(condition,function(data) {
+  var columns = " category,sum(amount) as sumAmount,spentAt";
+  bet.findOne(columns,condition,function(data) {
       res.json({data});
    
     });
@@ -83,8 +86,8 @@ router.post("/reports", function(req, res) {
 
 router.post("/expense", function(req, res) {
   var createdAt = new Date();
-  var updatedAt = new Date();
-  bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","updatedAt"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,updatedAt], function(result) {
+  createdAt = moment(createdAt).format('YYYY-MM-DD');
+  bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","Uid"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,2], function(result) {
     // Send back the ID 
     res.json({ id: result.insertId });
   });
@@ -110,6 +113,7 @@ router.put("/api/expense/:id", function(req, res) {
     }
   );
 });
+
 
 /*router.get("/reports/user", function(req, res) {
   console.log(req.query);

@@ -35,7 +35,7 @@
       </ul><br>
     </div>
     <br>
-      {{#if hbdashboard }}
+     <!-- {{#if hbdashboard }}
       <table>
         <tr>
            <th>spent-At</th>
@@ -59,6 +59,11 @@
       {{/each}}
       
     </table>
+    {{/if}}-->
+    {{#if hbdashboard }}
+    <div class="col-sm-9 formData">
+        <canvas id="canvas"></canvas>
+    </div>
     {{/if}}
 
     {{#if hbexpense }}
@@ -186,7 +191,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Spent At</th>
+                  <th scope="col">Category</th>
                   <th scope="col">Amount</th>
                 </tr>
                 <tbody id="userReport"></tbody>

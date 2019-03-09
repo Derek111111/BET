@@ -3,21 +3,21 @@ $(function() {
   //Function to generate chart from JSON object
   function chartReport(report1){
     var labels = report1.data.map(function(e) {
-      return e.spentAt;
+      return e.category;
    });
    var data = report1.data.map(function(e) {
-      return e.amount;
+      return e.sumAmount;
    });;
    
    var ctx = canvas.getContext('2d');
    var config = {
-      type: 'line',
+      type: 'pie',
       data: {
          labels: labels,
          datasets: [{
             label: 'Graph Line',
             data: data,
-            backgroundColor: 'rgba(0, 250, 0, 0.3)',
+            backgroundColor: ['rgba(0, 250, 0, 0.3)','rgba(250, 0, 0, 0.3)'],
             //fillColor             : "rgba(230,18,20,0.2)",
             //strokeColor           : "rgba(151,187,205,1)",
             borderColor            : "rgba(255,0,0,1)",
@@ -65,8 +65,8 @@ $(function() {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
           var report = {
-          firstDate: $("#firstDate").val().trim(),
-          secondDate: $("#secondDate").val().trim(),
+            firstDate: moment($("#firstDate").val().trim()).format('YYYY-MM-DD'),
+            secondDate: moment($("#secondDate").val().trim()).format('YYYY-MM-DD'),
           id:1
         };
         
@@ -85,8 +85,8 @@ $(function() {
             var index=i;
             var newRow = $("<tr>").append(
               $("<td>").text(++index),
-              $("<td>").text(report.data[i].spentAt),
-              $("<td>").text(report.data[i].amount),
+              $("<td>").text(report.data[i].category),
+              $("<td>").text(report.data[i].sumAmount),
             );
             $("#userReport").append(newRow);
           }
@@ -115,7 +115,11 @@ $(function() {
         }).then(
           function(report) {
             console.log("Dashboard");
-            chartReport(report);
+            var report1={
+              hbdashboard:true,
+              report:report
+            };
+            chartReport(report1);
             // Reload the page to get the updated list
             //location.reload();
           }

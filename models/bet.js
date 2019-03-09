@@ -7,6 +7,16 @@ var bet = {
       cb(res);
     });
   },
+  allCategory: function(cb) {
+    orm.allCategory("category", function(res) {
+      cb(res);
+    });
+  },
+  findOne: function(columns,condition,cb) {
+    orm.findOne("bills",columns,condition, function(res) {
+      cb(res);
+    });
+  },
   // The variables cols and vals are arrays.
   create: function(cols, vals, cb) {
     orm.create("bills", cols, vals, function(res) {
