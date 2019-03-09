@@ -28,13 +28,39 @@
     <div class="col-sm-3 sidenav hidden-xs">
       <h2>Logo</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="/">Dashboard</a></li>
+        <li class="dashboard"><a href="/dashboard">Dashboard</a></li>
         <li class="expense"><a href="/expense"  id="expense">Expense</a></li>
         <li class="income"><a href="/income" id="income">Update-Income</a></li>
         <li class="reports"><a href="/reports" id="report">Reports</a></li>
       </ul><br>
     </div>
     <br>
+      {{#if hbdashboard }}
+      <table>
+        <tr>
+           <th>spent-At</th>
+           <th>Amount</th>
+           <th>Payment-Mode</th>
+           <th>Category</th>
+           <th>Remarks</th>
+           <th>Bill-Date</th>
+
+        </tr>
+      {{#each user}}
+          <tr>
+          <td>{{this.spentAt}}</td>
+          <td>{{this.amount}}</td>
+          <td>{{this.paymentMode}}</td>
+          <td>{{this.category}}</td>
+          <td>{{this.remarks}}</td>
+          <td>{{this.billDate}}</td>
+
+         </tr>
+      {{/each}}
+      
+    </table>
+    {{/if}}
+
     {{#if hbexpense }}
     <div class="col-sm-9 formData">
        
@@ -137,13 +163,13 @@
     <div class="col-sm-9 formData">
           <form class="needs-validation reportsForm" novalidate>
             <div class="form-group row">
-                <label for="firstDate" class="col-sm-2 col-form-label">First Date</label>
+                <label for="firstDate" class="col-sm-2 col-form-label">Start Date</label>
                 <div class="col-sm-6">
                   <input type="date" class="form-control" id="firstDate" placeholder="Enter First Date" required>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="secondDate" class="col-sm-2 col-form-label">Second Date</label>
+                <label for="secondDate" class="col-sm-2 col-form-label">End Date</label>
                 <div class="col-sm-6">
                   <input type="date" class="form-control" id="secondDate" placeholder="Enter Second Date" required>
                 </div>
@@ -155,33 +181,23 @@
             </div>
             
             </form>
+             <div class="col-sm-9">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Spent At</th>
+                  <th scope="col">Amount</th>
+                </tr>
+                <tbody id="userReport"></tbody>
+            </thead>
+         </table>
+         </div>
+         <canvas id="canvas"></canvas>
             </div>
     {{/if}}
-      <canvas id="myChart" width="400" height="400"></canvas>
-      {{#if hbreports}}
-      <h1>Reports</h1>
-    
-    
-    <table>
-        <tr>
-           <th>spentAt</th>
-           <th>Amount</th>
-        </tr>
+      
         
-    {{#each reports}}
-              
-                <tr>
-                
-                 <td>{{spentAt}}</td>
-                <td>{{amount}} </td>
-                </tr>
-
-   
-    {{/each}}
-    
-    </table>
-    {{/if}}
-
 </div>
 </div>
 <footer class="container-fluid text-center">

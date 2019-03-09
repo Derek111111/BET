@@ -35,3 +35,29 @@
 
        <td>{{this.data.spentAt}}</td>
                 <td>{{this.data.amount}} </td>
+
+
+                <canvas id="myChart" width="400" height="400"></canvas>
+      {{#if hbreports}}
+      <h1>Reports</h1>
+    
+    
+    <table>
+        <tr>
+           <th>spentAt</th>
+           <th>Amount</th>
+        </tr>
+        
+    {{#each reports}}
+              
+                <tr>
+                
+                 <td>{{spentAt}}</td>
+                <td>{{amount}} </td>
+                </tr>
+
+   
+    {{/each}}
+    
+    </table>
+    {{/if}}
