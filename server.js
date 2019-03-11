@@ -22,7 +22,11 @@ app.set("view engine", "handlebars");
 //require("./routes/expense-api-routes.js")(app);
 //require("./routes/html-routes.js")(app);
 var routes = require("./controllers/expenseController.js");
+var routes2 = require("./controllers/userController.js");
+
 app.use(routes);
+app.use(routes2);
+
 
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);

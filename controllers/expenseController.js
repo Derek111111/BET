@@ -1,6 +1,8 @@
 var express = require("express");
 
 var router = express.Router();
+var router = express.Router();
+
 var connection = require("../config/connection.js");
 var bet = require("../models/bet.js");
 var moment = require("moment");
@@ -8,15 +10,12 @@ var moment = require("moment");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-
-     var hbsObject = {
-      hbhome:true
-    };
-     res.render("index", hbsObject);
+  res.render("index");
+     
 });
 
-router.get("/dashboard", function(req, res) {
-  var condition = " WHERE Uid = 1";
+router.get("/api/dash", function(req, res) {
+ /* var condition = " WHERE Uid = 1";
   bet.all(condition,function(data) {
     
     var hbsObject = {
@@ -26,9 +25,28 @@ router.get("/dashboard", function(req, res) {
     //res.render("index", hbsObject);
     res.json(data);
  
-  });
+  });*/
+  var hbsObject = {
+      hbhome:true
+    };
+     res.render("index1", hbsObject);
 });
 
+router.get("/dashboard", function(req, res) {
+
+   var condition = " WHERE Uid = 1";
+   bet.all(condition,function(data) {
+     
+     var hbsObject = {
+       user: data,
+       hbdashboard:true
+     };
+     
+     res.render("index1", hbsObject);  
+   });
+    
+ });
+ 
 router.get("/expense", function(req, res) {
   /*connection.query("SELECT * FROM category;", function(err, data) {
     if (err) {
@@ -47,7 +65,7 @@ router.get("/expense", function(req, res) {
       hbexpense:true
     };
     //console.log(JSON.stringify(data));
-    res.render("index", hbsObject);
+    res.render("index1", hbsObject);
  
   });
 });
@@ -58,7 +76,7 @@ router.get("/income", function(req, res) {
       //income: data,
       hbincome:true
     };
-    res.render("index", hbsObject);
+    res.render("index1", hbsObject);
  
 });
 
@@ -68,7 +86,7 @@ router.get("/reports", function(req, res) {
       hbreportsform:true
     };
     console.log(hbsObject);
-    res.render("index",hbsObject);
+    res.render("index1",hbsObject);
     
 });
 
