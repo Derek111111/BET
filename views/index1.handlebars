@@ -13,7 +13,7 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
+          <li><a href="/">BET</a></li>
           <li ><a href="#"></a></li>
           <li ><a href="#"></a></li>
           
@@ -28,9 +28,9 @@
     <div class="col-sm-3 sidenav hidden-xs">
       
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="/">Home</a></li>
         <li class="clearfix dashboard"><a href="/dashboard">Dashboard</a></li>
         <li class="clearfix expense"><a href="/expense"  id="expense">Expense</a></li>
-        <li class="clearfix income"><a href="/income" id="income">Update-Income</a></li>
         <li class="clearfix reports"><a href="/reports" id="report">Reports</a></li>
       </ul><br>
     </div>
@@ -150,27 +150,7 @@
       
   </div>
   {{/if}}
-  {{#if hbincome }}
-    <h1>Update Income</h1>
-    <div class="col-sm-9 formData">
-       
-          <form class="needs-validation incomeForm" novalidate>
-            <div class="form-group row">
-              <label for="income" class="col-sm-2 col-form-label">Enter Income</label>
-              <div class="col-sm-6">
-              <input type="text" class="form-control" id="income" placeholder="Enter new Income" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary">Update Income</button>
-            </div>
-            </div>
-            </form>
-            </div>
-  {{/if}}
-
-  
+    
     {{#if hbreportsform}}
     <div class="col-sm-9 formData">
           <form class="needs-validation reportsForm" novalidate>
