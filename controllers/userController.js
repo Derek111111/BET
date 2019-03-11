@@ -8,8 +8,9 @@ var usersTable = "users";
 
 //GET for logging in users
 router.get("/api/log_in",function(req,res){
-    ///res.render("index1");
+    
     userValidate(req,res);
+    res.render("index1");
 
 });
 
