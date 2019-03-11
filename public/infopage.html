@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  </head>
+  <script src="assets/js/bet1.js" type="text/javascript"></script>
+</head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -211,8 +212,7 @@
         </div>
     
         <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <a href="/api/dash" class="dashboardbtn"><button type="button">Dashboard</button></a>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
        <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
       </form>
@@ -223,7 +223,7 @@
 </div>
 
 <!-- Image of location/map -->
-<img src="assets/img/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
+<img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
 
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">

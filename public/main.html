@@ -165,36 +165,38 @@
   
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
-  <h2 class="text-center">REGISTER & LOGIN </h2>
+  <h2 class="text-center"></h2>LOGIN </h2>
   <div class="row1">
     <div class="col-sm-5 slideanim">
         <h2 class="text-center">LOGIN</h2>
             <div class="col-sm-6 form-group">
-            <input class="form-control" id="email-login" name="email" placeholder="Email id" type="email" required>
+            <input class="form-control" id="email" name="email" placeholder="Email id" type="email" required>
             </div>
             <div class="col-sm-6 form-group">
               
-              <input class="form-control"  name="psw" id = "password-login"  placeholder="Enter Password" type="password" required>
+              <input class="form-control"  name="psw"  placeholder="Enter Password" type="password" required>
             </div>
             <div class="row">
                 <div class="col-sm-12 form-group">
-                  <button class="btn btn-default pull-right" id="log-in" type="submit">Submit</button>
+                  <button class="btn btn-default pull-right" type="submit">Submit</button>
                 </div>
+
+                <span class="psw">Not Registered Yet? Please Click <a href="#">Register</a></span>
             </div>
     </div>
         <div class="col-sm-7 slideanim">
       
-          <h2 class="text-center">REGISTER</h2>
+          <h2 class="text-center">REGISTER </h2>
         
         <div class="col-sm-10 form-group">
-          <input class="form-control" id="username" name="userid" placeholder="Userid" type="username" required>
+          <input class="form-control" id="email" name="email" placeholder="Userid" type="email" required>
         </div>
         <div class="col-sm-10 form-group">
             <input class="form-control" id="email" name="email" placeholder="Email id" type="email" required>
           </div>
           <div class="col-sm-10 form-group">
               
-              <input class="form-control"  name="psw" id = "password" placeholder="Enter Password" type="password" required>
+              <input class="form-control"  name="psw"  placeholder="Enter Password" type="password" required>
             </div>
             <div class="col-sm-10 form-group">
               
@@ -203,7 +205,7 @@
       </div>
             <div class="row">
         <div class="col-sm-6 form-group">
-          <button class="btn btn-default pull-right" id="register-submit" type="submit">Submit</button>
+          <button class="btn btn-default pull-right" type="submit">Submit</button>
         </div>
         <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -211,8 +213,7 @@
         </div>
     
         <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <a href="/api/dash" class="dashboardbtn"><button type="button">Dashboard</button></a>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
        <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
       </form>
@@ -223,7 +224,7 @@
 </div>
 
 <!-- Image of location/map -->
-<img src="assets/img/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
+<img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
 
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">

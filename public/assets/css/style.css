@@ -3,17 +3,17 @@
     
 /* Set gray background color and 100% height */
 .sidenav {
-  background-color: #f1f1f1;
+  background-color: #5bc5a7;
   height: 100%;
 }
 footer {
-  background-color: #337ab7;
+  background-color: #eb774d;
   color: white;
   padding: 15px;
   margin-top: 71px;
 }
 .navbar-inverse{
-    background-color: #337ab7;
+    background-color: #eb774d;
 }
 .navbar-inverse .navbar-nav>.active>a {
 color: #fff;
@@ -32,6 +32,12 @@ color: #ffffff;
 }
 .dataForm{
     padding-top: 60px;
+    
+}
+.logo{
+width:40px;
+height:40px;
+padding-top: 0px;
 }
 #myNavbar{
     color:#f1f1f1;
@@ -47,7 +53,10 @@ table,tr,td,th{
   height: 290px !important;
   width: 829px !important;
 }
-
+a{
+  color:white;
+  font-size: 16px;
+}
 /* On small screens, set height to 'auto' for the grid */
 @media screen and (max-width: 767px) {
   .row.content {height: auto;} 
