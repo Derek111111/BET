@@ -10,8 +10,7 @@ var usersTable = "users";
 router.get("/api/log_in",function(req,res){
     
     userValidate(req,res);
-    res.render("index1");
-
+    
 });
 
 
@@ -104,7 +103,7 @@ function userValidate(req,result){
         }
 
     });
-
+    
 }
 
 function newUser(req,result){

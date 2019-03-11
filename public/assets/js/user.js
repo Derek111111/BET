@@ -40,6 +40,11 @@ $(function(){
             password: $("#password-login").val().trim()
 
         };
+        if((userToCheck.email!=" ") || (userToCheck.password!=" "))
+        {
+            console.log("Enter details");
+            $("#log-in").disabled=false;
+        }
         console.log("===="+userToCheck);
         $.ajax("/api/log_in", {
 
@@ -49,6 +54,8 @@ $(function(){
         }).done(function(){
 
             console.log("successful login");
+            
+
 
         }).fail(function(){
 
@@ -59,17 +66,12 @@ $(function(){
 
     });
 
-    $(".dashboardbtn").on("click", function(){
-
-        $.ajax("/api/dash", {
-
-            type: "GET",
-            
-
-        }).done(function(){
-
-            console.log("successful login");
+    $("#password-login").keyup(function(){
+        $("#log-in").prop('disabled',false);
+        
     });
-    });
-
+    $(".login").on("click",function(){
+        $("#log-in").prop('disabled', true);
+    })
+   
 });

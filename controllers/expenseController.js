@@ -14,16 +14,16 @@ router.get("/", function(req, res) {
      
 });
 
-router.get("/api/dash", function(req, res) {
- /* var condition = " WHERE Uid = 1";
-  bet.all(condition,function(data) {
+router.get("/dash", function(req, res) {
+  var condition = " WHERE Uid = 1";
+  /*bet.all(condition,function(data) {
     
     var hbsObject = {
       user: data,
       hbdashboard:true
     };
-    //res.render("index", hbsObject);
-    res.json(data);
+    res.render("index1", hbsObject);
+    //res.json(data);
  
   });*/
   var hbsObject = {
