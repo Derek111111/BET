@@ -67,7 +67,6 @@ $(function() {
           var report = {
             firstDate: moment($("#firstDate").val().trim()).format('YYYY-MM-DD'),
             secondDate: moment($("#secondDate").val().trim()).format('YYYY-MM-DD'),
-          id:1
         };
         
         // Send the POST request.
@@ -80,6 +79,7 @@ $(function() {
           console.log("created new Expense");
                     
           $("#userReport").empty();
+          $(".head").append("<tr> <th>#</th> <th>Category</th><th>Amount</th> </tr>");
           for(var i=0;i<report.data.length;i++)
           {
             var index=i;
@@ -110,7 +110,7 @@ $(function() {
         // Make sure to preventDefault on a submit event.
         
         // Send the POST request.
-          $.ajax("/dashboard", {
+          $.ajax("/userDashboard", {
           type: "GET",
         }).then(
           function(report) {
@@ -157,18 +157,4 @@ $(function() {
         );
       });
       
-      $(document).on("click","income",function(event) {
-        // Make sure to preventDefault on a submit event.
-        
-        // Send the POST request.
-          $.ajax("/income", {
-          type: "GET",
-        }).then(
-          function() {
-            console.log("created new Income Entry");
-            // Reload the page to get the updated list
-            location.reload();
-          }
-        );
       });
-    });
