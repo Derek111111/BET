@@ -1,4 +1,5 @@
 var express = require("express");
+var session = require('express-session');
 
 var PORT = process.env.PORT || 3000;
 
@@ -15,7 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Set Handlebars.
 var exphbs = require("express-handlebars");
-
+app.use(session({secret: 'ssshhhhh'}));
+var sess;
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 

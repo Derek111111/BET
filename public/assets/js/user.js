@@ -51,9 +51,16 @@ $(function(){
             type: "GET",
             data: userToCheck//send data to check if the user exists
 
-        }).done(function(){
+        }).done(function(data){
 
             console.log("successful login");
+            $.ajax("/dash/",{
+                type : "GET",
+
+
+            }).done(function(){
+                console.log("done");
+            });
             
 
 

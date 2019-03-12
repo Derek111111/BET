@@ -1,4 +1,5 @@
 var express = require("express");
+var session = require('express-session');
 
 var router = express.Router();
 
@@ -77,7 +78,10 @@ function logInFlag(req,result,userId){
 }
 
 function userValidate(req,result){
-
+    var sess = req.session;
+    //In this we are assigning email to sess.email variable.
+    //email comes from HTML page.
+    sess.email=req.body.email;
     console.log("logging you in");
     var solutionsObj = [
         req.query.email,
@@ -98,6 +102,8 @@ function userValidate(req,result){
             
             //calling the query to log the user in
             userId = res[0].id;
+            sess.userId=res[0].id;
+            sess.userName=res[0].user_name;
            logInFlag(req,result,userId);
 
         }

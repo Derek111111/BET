@@ -13,10 +13,11 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="/">BET</a></li>
-          <li ><a href="#"></a></li>
-          <li ><a href="#"></a></li>
           
+          <li><a href="/">BET</a></li>
+          <li>Welcome, {{uName}}</li>
+          <li><a href="/logout">LOGOUT</a></li>
+                   
         </ul>
        
       </div>
@@ -29,7 +30,7 @@
       
       <ul class="nav nav-pills nav-stacked">
         <li><a href="/">Home</a></li>
-        <li class="clearfix dashboard"><a href="/dashboard">Dashboard</a></li>
+        <li class="clearfix dashboard"><a href="/userDashboard">Dashboard</a></li>
         <li class="clearfix expense"><a href="/expense"  id="expense">Expense</a></li>
         <li class="clearfix reports"><a href="/reports" id="report">Reports</a></li>
       </ul><br>
@@ -89,7 +90,7 @@
                     <input type="text" class="form-control" list="categories" name="category" id="category">
                     <datalist id="categories">
                     
-                        {{#each expense}}
+                        {{#each user}}
                         <option value="{{this.category_name}}">
                         {{/each}}
 
@@ -175,17 +176,15 @@
             </form>
              <div class="col-sm-9">
             <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Amount</th>
-                </tr>
+              <thead class="head">
+                
+              </thead>
                 <tbody id="userReport"></tbody>
-            </thead>
-         </table>
+            </table>
          </div>
-         <canvas id="canvas"></canvas>
+        <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+          <canvas id="chart"></canvas>
+        </div>
             </div>
     {{/if}}
       
