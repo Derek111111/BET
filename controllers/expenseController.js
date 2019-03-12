@@ -12,13 +12,19 @@ var moment = require("moment");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
+  
   res.render("index");
      
 });
 
 router.get("/dash", function(req, res) {
-  var condition = " WHERE Uid = " + req.session.userId;
-  console.log("id"+req.params.id);
+
+  //if (req == null || res  == null || req.session == null)
+  //{
+    console.log("session: "+JSON.stringify( req.session));
+    var condition = " WHERE Uid = " + req.session.userId;
+  //}
+  
   bet.all(condition,function(data) {
     
     var hbsObject = {
@@ -75,7 +81,7 @@ router.get("/expense", function(req, res) {
       uName :req.session.userName,
       hbexpense:true
     };
-    //console.log(JSON.stringify(data));
+    
     res.render("index1", hbsObject);
  
   });
@@ -96,7 +102,7 @@ router.get("/reports", function(req, res) {
 
 router.post("/reports", function(req, res) {
 
-  var condition =  " WHERE createdAt between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.session.userId + " group By category";
+  var condition =  " WHERE billDate between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.session.userId + " group By category";
   
   var columns = " category,sum(amount) as sumAmount,spentAt";
   bet.findOne(columns,condition,function(data) {
@@ -107,7 +113,7 @@ router.post("/reports", function(req, res) {
 
 router.post("/expense", function(req, res) {
   var createdAt = new Date();
-  createdAt = moment(createdAt).format('YYYY-MM-DD');
+  createdAt = moment(createdAt).format('MM-DD-YYYY');
   bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","Uid"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,req.session.userId], function(result) {
     // Send back the ID 
     res.json({ id: result.insertId });
