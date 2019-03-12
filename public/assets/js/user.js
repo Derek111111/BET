@@ -54,9 +54,8 @@ $(function(){
         }).done(function(data){
 
             console.log("successful login");
-            $.ajax("/dash/",{
+            $.ajax("/dash",{
                 type : "GET",
-
 
             }).done(function(){
                 console.log("done");

@@ -9,26 +9,58 @@ $(function() {
       return e.sumAmount;
    });;
    
-   var ctx = canvas.getContext('2d');
-   var config = {
+   //var ctx = canvas.getContext('2d');
+   /*var config = {
       type: 'bar',
+      
       data: {
          labels: labels,
          datasets: [{
             label: 'Graph Line',
             data: data,
             backgroundColor: ['rgba(0, 250, 0, 0.3)','rgba(250, 0, 0, 0.3)'],
-            //fillColor             : "rgba(230,18,20,0.2)",
-            //strokeColor           : "rgba(151,187,205,1)",
             borderColor            : "rgba(255,0,0,1)",
-            //pointStrokeColor      : "#fff",
-            //pointHighlightFill    : "#fff",
-            //pointHighlightStroke  : "rgba(151,187,205,1)",
+            
          }]
       }
-   };
+   };*/
    
-   var chart = new Chart(ctx, config);
+   var data = {
+    labels: labels,
+    datasets: [{
+      label: 'Graph Line',
+      backgroundColor: ['rgba(0, 255, 0, 0.3)','rgba(255, 0, 0, 0.3)','rgba(120, 60, 0, 0.3)','rgba(80, 40, 90, 0.3)','rgba(0, 51, 102, 0.3)','rgba(153, 76, 0, 0.3)','rgba(255, 255, 204, 0.3)','rgba(0, 0, 255, 0.3)'],
+      borderColor: "rgba(255,99,132,1)",
+      borderWidth: 2,
+      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      hoverBorderColor: "rgba(255,99,132,1)",
+      data: data,
+    }]
+  };
+   var options = {
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        stacked: true,
+        gridLines: {
+          display: true,
+          color: "rgba(255,99,132,0.2)"
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }]
+    }
+  };
+  
+  Chart.Bar('chart', {
+    options: options,
+    data: data
+  });
+  
+   //var chart = new Chart(ctx, config);
   }
 
     $(".dataForm").on("submit", function(event) {
@@ -65,8 +97,8 @@ $(function() {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
           var report = {
-            firstDate: moment($("#firstDate").val().trim()).format('YYYY-MM-DD'),
-            secondDate: moment($("#secondDate").val().trim()).format('YYYY-MM-DD'),
+            firstDate: moment($("#firstDate").val().trim()).format('MM/DD/YYYY'),
+            secondDate: moment($("#secondDate").val().trim()).format('MM/DD/YYYY'),
         };
         
         // Send the POST request.
@@ -76,38 +108,52 @@ $(function() {
           data: report
         }).then(
           function(report) {
-          console.log("created new Expense");
-                    
-          $("#userReport").empty();
-          $(".head").append("<tr> <th>#</th> <th>Category</th><th>Amount</th> </tr>");
-          for(var i=0;i<report.data.length;i++)
+          console.log("Report:  " + report.data);
+          if(report.data===undefined || report.data===null || report.data.length < 1)   
           {
-            var index=i;
-            var newRow = $("<tr>").append(
-              $("<td>").text(++index),
-              $("<td>").text(report.data[i].category),
-              $("<td>").text(report.data[i].sumAmount),
-            );
-            $("#userReport").append(newRow);
-          }
-          
-          chartReport(report);
-                         
-         /* $.ajax("/reports/user", {
-            type: "GET",
-            data: report
-          }).then(
-            function() {
-            // Reload the page to get the updated list
-            //location.reload();
-            console.log("created report");
-          }
-        );*/
+            $(".NoRecord").empty();
+            $(".NoRecord").html("<h5>No Records found</h5>");
+          }     
+          else{
+              $("#userReport").empty();
+              $(".NoRecord").empty();
+              $(".head").append("<tr> <th>#</th> <th>Category</th><th>Amount</th> </tr>");
+              for(var i=0;i<report.data.length;i++)
+              {
+                var index=i;
+                var newRow = $("<tr>").append(
+                  $("<td>").text(++index),
+                  $("<td>").text(report.data[i].category),
+                  $("<td>").text(report.data[i].sumAmount),
+                );
+                $("#userReport").append(newRow);
+              }
+              /*google.charts.load('current', {'packages':['table']});
+              google.charts.setOnLoadCallback(drawTable);
+
+              function drawTable() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Category');
+              data.addColumn('number', 'Amount');
+              data.addColumn('boolean', 'Full Time Employee');
+              for(var i=0;i<report.data.length;i++)
+              {
+              data.addRows([
+                [report.data[i].category,  report.data[i].sumAmount, true],
+                
+              ]);
+            }
+              var table = new google.visualization.Table(document.getElementById('table_div'));
+
+              table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+              }*/
+              
+              chartReport(report);
+            }             
         });
       });
 
       $(document).on("click","dashboard",function(event) {
-        // Make sure to preventDefault on a submit event.
         
         // Send the POST request.
           $.ajax("/userDashboard", {
@@ -120,14 +166,13 @@ $(function() {
               report:report
             };
             chartReport(report1);
-            // Reload the page to get the updated list
-            //location.reload();
+           
           }
         );
       });
 
       $(document).on("click","expense",function(event) {
-        // Make sure to preventDefault on a submit event.
+        
         
         // Send the POST request.
           $.ajax("/expense", {

@@ -78,7 +78,7 @@ function logInFlag(req,result,userId){
 }
 
 function userValidate(req,result){
-    var sess = req.session;
+    
     //In this we are assigning email to sess.email variable.
     //email comes from HTML page.
     sess.email=req.body.email;
@@ -102,9 +102,9 @@ function userValidate(req,result){
             
             //calling the query to log the user in
             userId = res[0].id;
-            sess.userId=res[0].id;
-            sess.userName=res[0].user_name;
-           logInFlag(req,result,userId);
+            req.session.userId=res[0].id;
+            req.session.userName=res[0].user_name;
+            logInFlag(req,result,userId);
 
         }
 
