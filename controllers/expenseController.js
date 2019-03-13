@@ -1,36 +1,31 @@
-var express = require("express");
-var session = require('express-session');
+//var express = require("express");
+//var session = require('express-session');
+//var router = express.Router();
+//var router = express.Router();
+//var connection = require("../config/connection.js");
 
-
-var router = express.Router();
-var router = express.Router();
-
-var connection = require("../config/connection.js");
 var bet = require("../models/bet.js");
 var moment = require("moment");
 
-
 // Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
+var expenseRoute=function(app){
+  app.get("/", function(req, res) {
   
   res.render("index");
      
 });
 
-router.get("/dash", function(req, res) {
+app.get("/dash", function(req, res) {
 
-  //if (req == null || res  == null || req.session == null)
-  //{
-    console.log("session: "+JSON.stringify( req.session));
+    console.log("session: "+req);
     var condition = " WHERE Uid = " + req.session.userId;
-  //}
-  
-  bet.all(condition,function(data) {
+    console.log("condition"+condition);
+    bet.all(condition,function(data) {
     
-    var hbsObject = {
-      user: data,
-      hbdashboard:true,
-      uName :req.session.userName
+      var hbsObject = {
+        user: data,
+        hbdashboard:true,
+        uName :req.session.userName
     };
     res.render("index1", hbsObject);
  
@@ -57,7 +52,7 @@ router.get("/dash", function(req, res) {
     
   });*/
   
-router.get("/userDashboard", function(req, res) {
+app.get("/userDashboard", function(req, res) {
    
    var condition = " WHERE Uid = " + req.session.userId;
    bet.all(condition,function(data) {
@@ -73,7 +68,7 @@ router.get("/userDashboard", function(req, res) {
     
  });
  
-router.get("/expense", function(req, res) {
+app.get("/expense", function(req, res) {
     
   bet.allCategory(function(data) {
     var hbsObject = {
@@ -88,7 +83,7 @@ router.get("/expense", function(req, res) {
 });
 
 
-router.get("/reports", function(req, res) {
+app.get("/reports", function(req, res) {
   
     var hbsObject = {
       hbreportsform:true,
@@ -100,8 +95,8 @@ router.get("/reports", function(req, res) {
 });
 
 
-router.post("/reports", function(req, res) {
-
+app.post("/reports", function(req, res) {
+  console.log("session: "+req.session.userId);
   var condition =  " WHERE billDate between  '" + req.body.firstDate + "' and '" + req.body.secondDate + "' and Uid= " + req.session.userId + " group By category";
   
   var columns = " category,sum(amount) as sumAmount,spentAt";
@@ -111,7 +106,7 @@ router.post("/reports", function(req, res) {
     });
 });
 
-router.post("/expense", function(req, res) {
+app.post("/expense", function(req, res) {
   var createdAt = new Date();
   createdAt = moment(createdAt).format('MM-DD-YYYY');
   bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","Uid"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,req.session.userId], function(result) {
@@ -119,6 +114,7 @@ router.post("/expense", function(req, res) {
     res.json({ id: result.insertId });
   });
 });
+}
 
 router.get('/logout',function(req,res){
   req.session.destroy(function(err) {
@@ -132,4 +128,4 @@ router.get('/logout',function(req,res){
 });
 
 // Export routes for server.js to use.
-module.exports = router;
+module.exports = expenseRoute;
