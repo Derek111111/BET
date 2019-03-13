@@ -55,6 +55,20 @@ var orm = {
       cb(result);
     });
   },
+  alluser: function(tableInput, condition,cb) {
+    
+    
+    var queryString = "SELECT * FROM " + tableInput ;
+    queryString += condition + ";";
+    console.log(queryString);
+ 
+  connection.query(queryString, function(err, result) {
+    if (err) {
+      throw err;
+    }
+    cb(result);
+  });
+},
   allCategory: function(tableInput,cb) {
     
     

@@ -32,8 +32,13 @@ var bet = {
     orm.delete("bills", condition, function(res) {
       cb(res);
     });
-  }
+  },
+  alluser: function(condition,cb) {
+    orm.alluser("users",condition, function(res) {
+      cb(res);
+    });
+  },
 };
-
-// Export the database functions for the controller (catsController.js).
+// Export the database functions for the controller (expenseController.js).
 module.exports = bet;
+

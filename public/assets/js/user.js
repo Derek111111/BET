@@ -30,7 +30,8 @@ $(function(){
     });
 
     //logging in button event listener
-    $("#log-in").on("click", function(){
+    $("#log-in").on("click", function(event){
+        event.preventDefault();
         console.log("login tried");
         //object to pass to server to actually validate with
         var userToCheck = {
@@ -40,29 +41,18 @@ $(function(){
             password: $("#password-login").val().trim()
 
         };
-        if((userToCheck.email!=" ") || (userToCheck.password!=" "))
-        {
-            console.log("Enter details");
-            $("#log-in").disabled=false;
-        }
+       
         console.log("===="+userToCheck);
-        $.ajax("/api/log_in", {
+        $.ajax("/log_in", {
 
             type: "GET",
             data: userToCheck//send data to check if the user exists
 
-        }).done(function(data){
+        }).done(function(){
 
             console.log("successful login");
-            $.ajax("/dash",{
-                type : "GET",
-
-            }).done(function(){
-                console.log("done");
-            });
+            window.location.assign("/userDashboard");
             
-
-
         }).fail(function(){
 
             console.log("Something went wrong, maybe this user does not exist");

@@ -1,22 +1,45 @@
-var express = require("express");
-var session = require('express-session');
-
-var router = express.Router();
 
 var connection = require("../config/connection");
 var orm = require("./../config/orm");
-var usersTable = "users";
+var bet = require("../models/bet.js");
 
 //GET for logging in users
-router.get("/api/log_in",function(req,res){
+var myroute= function(app){
+    app.get("/log_in",function(req,result){
     
-    userValidate(req,res);
+        var condition = " WHERE email_id =  '" + req.query.email +  "' AND password = '" + req.query.password +"'";
     
-});
+    //check database for the inserted username and email before creating(no copies)
+    bet.alluser(condition,function(res) {
+    
+        console.log(res);
 
+        if(res === null || res === undefined || res.length < 1){//found no user, no login allowed
+
+            result.status(404).send({data:"NotValid"});
+
+        }else{//ookk user found, log in
+            
+            //calling the query to log the user in
+            userId = res[0].id;
+
+           // app.use(session({userId:res[0].id,userName: res[0].user_name}));
+
+            req.session.userId=res[0].id;
+            req.session.userName=res[0].user_name;
+            
+            console.log(req.session.userId);
+            result.redirect("/userDashboard");
+            logInFlag(req,result,userId) ; 
+        }
+
+    });
+
+       
+    });   
 
 //POST for user register checking and creation
-router.post("/api/register_user",function(req, result){
+app.post("/api/register_user",function(req, result){
 
     console.log(req.body);
 
@@ -51,6 +74,7 @@ router.post("/api/register_user",function(req, result){
 
 
 });
+}
 
 function logInFlag(req,result,userId){
 
@@ -71,45 +95,10 @@ function logInFlag(req,result,userId){
 
         console.log("Successfully logged them in!");
 
-        result.json({action: "login", userId: userId});
+        //result.json({action: "login", userId: userId});
 
     }); 
 
-}
-
-function userValidate(req,result){
-    
-    //In this we are assigning email to sess.email variable.
-    //email comes from HTML page.
-    sess.email=req.body.email;
-    console.log("logging you in");
-    var solutionsObj = [
-        req.query.email,
-        req.query.password
-    ];
-    
-    //checking if its a real user
-    connection.query("SELECT * FROM users WHERE email_id = ? AND password = ?", solutionsObj, function(err,res){
-
-        if(err){throw err};
-        console.log(res);
-
-        if(res === null || res === undefined || res.length < 1){//found no user, no login allowed
-
-            result.status(404).send({data:"NotValid"});
-
-        }else{//ookk user found, log in
-            
-            //calling the query to log the user in
-            userId = res[0].id;
-            req.session.userId=res[0].id;
-            req.session.userName=res[0].user_name;
-            logInFlag(req,result,userId);
-
-        }
-
-    });
-    
 }
 
 function newUser(req,result){
@@ -140,4 +129,4 @@ function newUser(req,result){
 
 }
 
-module.exports = router;
+module.exports = myroute;
