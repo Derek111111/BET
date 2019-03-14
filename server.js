@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Set Handlebars.
 var exphbs = require("express-handlebars");
-app.use(session({resave:false,secret: '123456' , saveUninitialized: true,cookie: { maxAge: 60000 }}));
+app.use(session({resave:false,secret: '123456' , saveUninitialized: true}));
 //var sess;
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

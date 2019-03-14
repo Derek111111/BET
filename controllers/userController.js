@@ -43,42 +43,48 @@ app.post("/api/register_user",function(req, result){
 
     console.log(req.body);
 
-    var queryString = "SELECT * FROM users ";
-    queryString += "WHERE user_name = ? ";
-    queryString += "AND email_id = ?";
-
-    var solutionsObj = [req.body.username,req.body.email];
-
-    console.log(queryString);
+    var condition= " WHERE user_name = '" + req.body.username + "' AND email_id = '" + req.body.email + "'";
+    
+    
+    console.log(condition);
 
     //check database for the inserted username and email before creating(no copies)
-    connection.query(queryString,solutionsObj,function(err,res){
+    
 
-        if(err){throw err};
+        if(req.body.email.includes("@") && req.body.email.includes(".")){//validate the email
 
-        console.log(res);
+        bet.alluser(condition,function(res) {
 
-        if(res === null || res === undefined || res.length < 1){//no user with this info found, create the account
+                console.log(res);
+            if(res === null || res === undefined || res.length < 1){//check to make sure they are not a user
 
-            //inser this data into the database as a new user
-            newUser(req,result);
+                //insert this data into the database as a new user
+                newUser(req,res);
+                result.redirect("/");
 
-        }else{//okay these users have been used before, see if they are a current user trying to log in
+            }else{//uhoh this email was already used
 
-            //searching username, email and password all in one to see if they are logging in
-            result.status(404).send({data:"NotValid"});//sends it to the fail method in bet1 for register POST
+                console.log("this email was already used");
+                result.status(404).send({data:"NotValid"});//sends it to the fail method in bet1 for register POST
+
+            } 
+        });
+        }else{
+
+            console.log("not a valid email grrr");
+            result.status(404).send({data:"EmailNotValid"});//let the user know to give a proper email
 
         }
 
     });
 
 
-});
 }
+
 
 function logInFlag(req,result,userId){
 
-    console.log("you pass this time idiot, you can log in.");
+    console.log("you pass this time, you can log in.");
 
     //UPDATE QUERY FOR LOGIN FLAG
     var updateQuery = "UPDATE users ";
@@ -105,25 +111,17 @@ function newUser(req,result){
 
     console.log("this user is not taken, create a new account");
 
-    //set up the query
-    var queryString = "INSERT INTO users (";
-    queryString += "user_name, email_id, password" + ") ";
-    queryString += "VALUES ?";
-
-    console.log(queryString);
-    
-    //get the data to insert
-    var values = [
-        [req.body.username,req.body.email,req.body.password]
-    ];
-
     //query for inserting new user
-    connection.query(queryString,[values],function(err,res){
+    bet.createUser(["user_name", "email_id","password"], [req.body.username, req.body.email,req.body.password], function(result) {
 
-        if(err){throw err};
         console.log("successfully made user");
-        console.log(res);
-        result.json({action: "newuser"});//send them to login screen after making new user
+        console.log(result);
+        //result.json({action: "newuser"});//send them to login screen after making new user
+        //req.session.userId=result.insertId;
+        //console.log("Inserted id:"+result.insertId);
+        //req.session.userName=req.body.username;
+            
+        //console.log(req.session.userName);
 
     });
 

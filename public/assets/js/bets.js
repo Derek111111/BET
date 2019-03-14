@@ -9,23 +9,7 @@ $(function() {
       return e.sumAmount;
    });;
    
-   //var ctx = canvas.getContext('2d');
-   /*var config = {
-      type: 'bar',
-      
-      data: {
-         labels: labels,
-         datasets: [{
-            label: 'Graph Line',
-            data: data,
-            backgroundColor: ['rgba(0, 250, 0, 0.3)','rgba(250, 0, 0, 0.3)'],
-            borderColor            : "rgba(255,0,0,1)",
-            
-         }]
-      }
-   };*/
-   
-   var data = {
+    var data = {
     labels: labels,
     datasets: [{
       label: 'Graph Line',
@@ -60,7 +44,6 @@ $(function() {
     data: data
   });
   
-   //var chart = new Chart(ctx, config);
   }
 
     $(".dataForm").on("submit", function(event) {
@@ -76,9 +59,7 @@ $(function() {
           paymentMode:$("#paymentMode").val().trim(),
 
         };
-        
-        alert(date1);
-    
+         
         // Send the POST request.
         $.ajax("/expense", {
           type: "POST",

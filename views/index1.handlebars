@@ -1,201 +1,208 @@
+<nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
 
-
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#"><img class="logo" src="../assets/img/logo.png"></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          
-          <li><a href="/">BET</a></li>
-          <li>Welcome, {{uName}}</li>
-          <li><a href="/logout">LOGOUT</a></li>
-                   
-        </ul>
-       
-      </div>
-    </div>
-  </nav>
-
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <a class="navbar-brand" rel="home" href="#" title="expenselogo">
+        <img style="max-width:100px; margin-top: -12px; margin-left:-127px;" src="assets/img/logo.png">
+      </a>
+      <span class="user">Welcome, <strong>{{uName}}</strong></span><br><br>
       
+    </div>
+    <span class="logout"><a href="/logout">LOGOUT</a></span>
+  </div>
+</nav>
+
+<br>
+<div class="container-fluid bg-grey">
+  <div class="row content">
+
+    <div class="col-sm-3 sidenav hidden-xs">
+      <div class="w3-col s8 w3-bar">
+        
+      </div>
+      <br><br>
       <ul class="nav nav-pills nav-stacked">
         <li><a href="/">Home</a></li>
         <li class="clearfix dashboard"><a href="/userDashboard">Dashboard</a></li>
-        <li class="clearfix expense"><a href="/expense"  id="expense">Expense</a></li>
+        <li class="clearfix expense"><a href="/expense" id="expense">Expense</a></li>
         <li class="clearfix reports"><a href="/reports" id="report">Reports</a></li>
       </ul><br>
+
     </div>
     <br>
-      {{#if hbdashboard }}
-      <div class="col-sm-9">
+    <div class="col-sm-1"></div>
+    {{#if hbdashboard }}
+    <div class="col-sm-8 right_side">
       <div class="card border-dark mb-3">
-        <div class="card-header">User</div>
-          <div class="card-body text-dark">
-            <table>
-                <tr>
-                  <th>spent-At</th>
-                  <th>Amount</th>
-                  <th>Payment-Mode</th>
-                  <th>Category</th>
-                  <th>Remarks</th>
-                  <th>Bill-Date</th>
+        <div class="card-header right_heading">DashBoard</div>
+        <br>
+        <div class="card-body text-dark ex3">
+          <table>
+            <tr>
+              <th>spent-At</th>
+              <th>Amount</th>
+              <th>Payment-Mode</th>
+              <th>Category</th>
+              <th>Remarks</th>
+              <th>Bill-Date</th>
 
-                </tr>
-              {{#each user}}
-                  <tr>
-                  <td>{{this.spentAt}}</td>
-                  <td>{{this.amount}}</td>
-                  <td>{{this.paymentMode}}</td>
-                  <td>{{this.category}}</td>
-                  <td>{{this.remarks}}</td>
-                  <td>{{this.billDate}}</td>
+            </tr>
+            {{#each user}}
+            <tr>
+              <td>{{this.spentAt}}</td>
+              <td>{{this.amount}}</td>
+              <td>{{this.paymentMode}}</td>
+              <td>{{this.category}}</td>
+              <td>{{this.remarks}}</td>
+              <td>{{this.billDate}}</td>
 
-                </tr>
-              {{/each}}
-              
-            </table>
-          </div>
+            </tr>
+            {{/each}}
+
+          </table>
+          <br>
         </div>
       </div>
-    {{/if}}
-    <!--{{#if hbdashboard }}
-    <div class="col-sm-9 formData">
-        <canvas id="canvas"></canvas>
     </div>
-    {{/if}}-->
-
+    {{/if}}
+    
     {{#if hbexpense }}
-    <div class="col-sm-9 formData">
-       
+    <div class="col-sm-8 right_side">
+      <div class="card border-dark mb-3">
+        <div class="card-header right_heading">Expense</div>
+        <div class="card-body text-dark">
+
           <form class="needs-validation dataForm" novalidate>
             <div class="form-group row">
-              <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+              <label for="amount" class="col-sm-2 col-form-label lbl_name">Amount : </label>
               <div class="col-sm-6">
                 <input type="email" class="form-control" id="amount" placeholder="Amount" required>
               </div>
             </div>
             <div class="form-group row">
-                <label for="categories" class="col-sm-2 col-form-label">Category</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" list="categories" name="category" id="category">
-                    <datalist id="categories">
-                    
-                        {{#each user}}
-                        <option value="{{this.category_name}}">
-                        {{/each}}
+              <label for="categories" class="col-sm-2 col-form-label lbl_name">Category : </label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" list="categories" name="category" id="category"
+                  placeholder="Category">
+                <datalist id="categories">
 
-                  </datalist>
-                </div>
+                  {{#each user}}
+                  <option value="{{this.category_name}}">
+                  {{/each}}
+
+                </datalist>
               </div>
-              <div class="form-group row">
-                <label for="spentAt" class="col-sm-2 col-form-label">Spent-at</label>
-                <div class="col-sm-6">
-                  <input type="spentAt" class="form-control" id="spentAt" placeholder="Spent-at" required>
-                </div>
+            </div>
+            <div class="form-group row">
+              <label for="spentAt" class="col-sm-2 col-form-label lbl_name">SpentAat : </label>
+              <div class="col-sm-6">
+                <input type="spentAt" class="form-control" id="spentAt" placeholder="Spent-at" required>
               </div>
-              <div class="form-group row">
-                <label for="remarks" class="col-sm-2 col-form-label">Remarks</label>
-                <div class="col-sm-6">
-                  <input type="remarks" class="form-control" id="remarks" placeholder="Remarks" required>
-                </div>
+            </div>
+            <div class="form-group row">
+              <label for="remarks" class="col-sm-2 col-form-label lbl_name">Remarks : </label>
+              <div class="col-sm-6">
+                <input type="remarks" class="form-control" id="remarks" placeholder="Remarks" required>
               </div>
-              <div class="form-group row">
-                <label for="date" class="col-sm-2 col-form-label">Bill-Date</label>
-                <div class="col-sm-6">
-                  <input type="date" class="form-control" id="date" placeholder="Bill Date" required>
-                </div>
+            </div>
+            <div class="form-group row">
+              <label for="date" class="col-sm-2 col-form-label lbl_name">Bill-Date : </label>
+              <div class="col-sm-6">
+                <input type="date" class="form-control" id="date" placeholder="Bill Date" required>
               </div>
-              <div class="form-group row">
-                <label for="date" class="col-sm-2 col-form-label">Payment Mode</label>
-                <div class="col-sm-6">
-                  <input type="paymentMode" class="form-control" id="paymentMode" placeholder="Mode of Payment" required>
-                </div>
+            </div>
+            <div class="form-group row">
+              <label for="date" class="col-sm-2 col-form-label lbl_name">Payment Mode : </label>
+              <div class="col-sm-6">
+                <input type="paymentMode" class="form-control" id="paymentMode" placeholder="Mode of Payment" required>
               </div>
-            
+            </div>
+
             <div class="form-group row">
               <div class="col-sm-6">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </form>
-          <script>
-          // Example starter JavaScript for disabling form submissions if there are invalid fields
-          (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-              // Fetch all the forms we want to apply custom Bootstrap validation styles to
-              var forms = document.getElementsByClassName('needs-validation');
-              // Loop over them and prevent submission
-              var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                  if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                  }
-                  form.classList.add('was-validated');
-                }, false);
-              });
-            }, false);
-          })();
-          </script>
-      
+        </div>
+      </div>
+    </div>
   </div>
-  {{/if}}
-    
-    {{#if hbreportsform}}
-    <div class="col-sm-9 formData">
-          <form class="needs-validation reportsForm" novalidate>
-            <div class="form-group row">
-                <label for="firstDate" class="col-sm-2 col-form-label">Start Date</label>
-                <div class="col-sm-6">
-                  <input type="date" class="form-control" id="firstDate" placeholder="Enter First Date" required>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="secondDate" class="col-sm-2 col-form-label">End Date</label>
-                <div class="col-sm-6">
-                  <input type="date" class="form-control" id="secondDate" placeholder="Enter Second Date" required>
-                </div>
-              </div>
-              <div class="form-group row">
-              <div class="col-sm-6">
-                <button type="button" class="btn btn-primary reportBtn">Submit</button>
-              </div>
-            </div>
-            
-            </form>
-             <div class="col-sm-9">
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+</div>
+{{/if}}
+
+{{#if hbreportsform}}
+<div class="col-sm-8 right_side">
+  <div class="card border-dark mb-3">
+    <div class="card-header right_heading">Reports</div>
+    <div class="card-body text-dark">
+      <br>
+      <form class="needs-validation reportsForm" novalidate>
+        <div class="form-group row">
+          <label for="firstDate" class="col-sm-2 col-form-label lbl_name">Start Date : </label>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" id="firstDate" placeholder="Enter First Date" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="secondDate" class="col-sm-2 col-form-label lbl_name">End Date : </label>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" id="secondDate" placeholder="Enter Second Date" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-primary reportBtn">Submit</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-9">
              <div class="NoRecord"></div> 
-                <table class="table">
+             <div class="ex3">
+                <table class="table ">
                 <thead class="head">
                 
                 </thead>
                 <tbody id="userReport"></tbody>
             </table>
-            
+            </div>
          </div>
         
           <div class="chart-container">
            <canvas id="chart"></canvas>
-          </div>
+  </div>
+</div>
 
-        
-            </div>
-    {{/if}}
-      
-        
+{{/if}}
+
+
 </div>
 </div>
-<footer class="container-fluid text-center">
-    <p>Footer Text</p>
+<footer class="container-fluid text-center grey">
+  <p>Copyright 2019 - BET Team</p>
 </footer>

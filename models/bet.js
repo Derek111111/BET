@@ -23,6 +23,11 @@ var bet = {
       cb(res);
     });
   },
+  createUser: function(cols, vals, cb) {
+    orm.createUser("users", cols, vals, function(res) {
+      cb(res);
+    });
+  },
   update: function(objColVals, condition, cb) {
     orm.update("bills", objColVals, condition, function(res) {
       cb(res);

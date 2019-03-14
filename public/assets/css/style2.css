@@ -18,10 +18,9 @@ body {
     margin-bottom: 30px;
   }  
   .jumbotron {
-    background-color:#29046d;
-    padding: 10px 10px;
-    color: #fff;
-    
+    background-color:rgb(236, 155, 33);
+    padding: 15px 20px;
+    color: #fff;    
     font-family: Montserrat, sans-serif;
   }
   .container-fluid {
@@ -34,6 +33,11 @@ body {
     color: #2e2958;
     font-size: 50px;
   }
+
+  .head{
+    color :rgb(255, 153, 0);
+  }
+
   .logo {
     color: #f4511e;
     font-size: 200px;
@@ -46,7 +50,9 @@ body {
   .thumbnail img {
     width: 100%;
     height: 100%;
-    margin-bottom: 10px;
+
+    margin-bottom: 20px;
+
   }
   .carousel-control.right, .carousel-control.left {
     background-image: none;
@@ -69,7 +75,7 @@ body {
     font-style: normal;
   }
   .panel {
-    border: 1px solid #f4511e; 
+    border: 1px solid rgb(255, 153, 0); 
     border-radius:0 !important;
     transition: box-shadow 0.5s;
   }
@@ -83,7 +89,7 @@ body {
   }
   .panel-heading {
     color: #fff !important;
-    background-color: #f4511e !important;
+    background-color: rgb(255, 153, 0) !important;
     padding: 25px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 0px;
@@ -103,12 +109,12 @@ body {
   }
   .panel-footer .btn {
     margin: 15px 0;
-    background-color: #f4511e;
+    background-color: rgb(255, 153, 0);
     color: #fff;
   }
   .navbar {
     margin-bottom: 0;
-    background-color: #f4511e;
+    background-color: #68635d;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -145,6 +151,111 @@ body {
   .row-text-center-slideanim {
 float: left;
   }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:#68635d;
+  color: white;
+  text-align: center;    
+  font-family: Montserrat, sans-serif;   
+  height:60px; 
+    }
+.grey{
+  font-family: Montserrat, sans-serif;
+  color:white;
+  
+  width:100%;
+  margin-bottom: 30px;
+}
+#show_login{  
+    background:none!important;
+    color:white;
+    border:none; 
+    padding:0!important;
+    font: inherit;
+    /*border is optional*/
+    border-bottom:1px solid #444; 
+    cursor: pointer;
+    margin-bottom: 0;
+    background-color: #68635d;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+    font-family: Montserrat, sans-serif;
+    margin-top: 15px;
+}
+      #login-alert
+      {
+       width:500px;
+       height:330px;
+       margin-top:100px;
+       background-color:#585858;
+       border-radius:3px;
+       box-shadow:0px 0px 10px 0px #424242;
+       padding:10px;
+       box-sizing:border-box;
+       font-family:helvetica;
+       visibility:hidden;
+       display:none;
+      }
+      #login-alert #close_login
+      {
+       position:absolute;
+       top:140px;
+       left:735px;
+       width:15px;
+       height:15px;
+      }
+      #login-alert p
+      {
+       margin-top:40px;
+       font-size:22px;
+       color:#E6E6E6;
+      }
+      #login-alert #login
+      {
+       width:250px;
+       height:40px;
+       border:2px solid silver;
+       border-radius:3px;
+       padding:5px;
+      }
+      #login-alert #password
+      {
+       margin-top:5px;
+       width:250px;
+       height:40px;
+       border:2px solid silver;
+       border-radius:3px;
+       padding:5px;
+      }
+      #login-alert #dologin
+      {
+       margin-left:-5px;
+       margin-top:10px;
+       width:250px;
+       height:40px;
+       border:none;
+       border-radius:3px;
+       color:#E6E6E6;
+       background-color:grey;
+       font-size:20px;
+      }
+  .cross{
+    margin-bottom:15px;
+  }   
+  .modal-header .close {
+    margin-top: 16px!important;
+}
+
+  
+
   @keyframes slide {
     0% {
       opacity: 0;
