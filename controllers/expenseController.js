@@ -84,9 +84,9 @@ app.post("/reports", function(req, res) {
 });
 
 app.post("/expense", function(req, res) {
-  var createdAt = new Date();
-  createdAt = moment(createdAt).format('MM-DD-YYYY');
-  bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","createdAt","Uid"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,createdAt,req.session.userId], function(result) {
+  //var createdAt = new Date();
+  //createdAt = moment(createdAt).format('YYYY-MM-DD');
+  bet.create(["amount", "category","spentAt", "remarks","paymentMode", "billDate","Uid"], [req.body.amount, req.body.category,req.body.spentAt, req.body.remarks,req.body.paymentMode,req.body.date1 ,req.session.userId], function(result) {
     // Send back the ID 
     res.json({ id: result.insertId });
   });

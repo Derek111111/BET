@@ -78,8 +78,8 @@ $(function() {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
           var report = {
-            firstDate: moment($("#firstDate").val().trim()).format('MM-DD-YYYY'),
-            secondDate: moment($("#secondDate").val().trim()).format('MM-DD-YYYY'),
+            firstDate: moment($("#firstDate").val().trim()).format('YYYY-MM-DD'),
+            secondDate: moment($("#secondDate").val().trim()).format('YYYY-MM-DD'),
         };
         
         // Send the POST request.
