@@ -5,17 +5,17 @@ USE bet;
 
 CREATE TABLE users
 (
-    id int NOT NULL AUTO_INCREMENT,
-    user_name varchar(255) NOT NULL,
-    email_id varchar(255) NOT NULL,
-    password varchar(255) NOT NULL,
-    PRIMARY KEY (id)
+	id int NOT NULL AUTO_INCREMENT,
+	user_name varchar(255) NOT NULL,
+	email_id varchar(255) NOT NULL,
+	password varchar(255) NOT NULL,
+	PRIMARY KEY (id)
 );
 CREATE TABLE category
 (
-    id integer NOT NULL AUTO_INCREMENT,
-    category_name varchar(255) NOT NULL,
-    PRIMARY KEY (id)
+	id integer NOT NULL AUTO_INCREMENT,
+	category_name varchar(255) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE bills
@@ -29,5 +29,6 @@ CREATE TABLE bills
     billDate timestamp,
     createdAt timestamp,
     Uid integer(10) not null,
+
 	PRIMARY KEY (id)
 );

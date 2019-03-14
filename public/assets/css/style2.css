@@ -20,8 +20,7 @@ body {
   .jumbotron {
     background-color:rgb(236, 155, 33);
     padding: 15px 20px;
-    color: #fff;
-    
+    color: #fff;    
     font-family: Montserrat, sans-serif;
   }
   .container-fluid {
@@ -34,9 +33,11 @@ body {
     color: #2e2958;
     font-size: 50px;
   }
+
   .head{
     color :rgb(255, 153, 0);
   }
+
   .logo {
     color: #f4511e;
     font-size: 200px;
@@ -49,7 +50,9 @@ body {
   .thumbnail img {
     width: 100%;
     height: 100%;
+
     margin-bottom: 20px;
+
   }
   .carousel-control.right, .carousel-control.left {
     background-image: none;
@@ -148,6 +151,7 @@ body {
   .row-text-center-slideanim {
 float: left;
   }
+
 .footer {
   position: fixed;
   left: 0;
@@ -251,6 +255,7 @@ float: left;
 }
 
   
+
   @keyframes slide {
     0% {
       opacity: 0;
