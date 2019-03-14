@@ -1,9 +1,3 @@
-//var express = require("express");
-//var session = require('express-session');
-//var router = express.Router();
-//var router = express.Router();
-//var connection = require("../config/connection.js");
-
 var bet = require("../models/bet.js");
 var moment = require("moment");
 
@@ -34,23 +28,6 @@ app.get("/dash", function(req, res) {
      
 });
 
-/*router.get("/dash/?:id", function(req, res) {
-  sess=req.session;
-  var condition = " WHERE Uid = " + req.params.id;
-  console.log("id"+req.params.id);
-  connection.query("select * from users where id=" + req.params.id,function(err, result) {
-    if (err) {
-      throw err;
-    }
-    bet.all(condition,function(data) {
-      console.log("Name:"+sess.userName);
-      //var uName=sess.userName;
-      res.render("index1");
-      //res.json(data);
-   
-    });
-    
-  });*/
   
 app.get("/userDashboard", function(req, res) {
    
@@ -114,9 +91,8 @@ app.post("/expense", function(req, res) {
     res.json({ id: result.insertId });
   });
 });
-}
 
-router.get('/logout',function(req,res){
+app.get('/logout',function(req,res){
   req.session.destroy(function(err) {
     if(err) {
       console.log(err);
@@ -126,6 +102,6 @@ router.get('/logout',function(req,res){
     }
   });
 });
-
+}
 // Export routes for server.js to use.
 module.exports = expenseRoute;

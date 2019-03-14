@@ -17,13 +17,17 @@ CREATE TABLE category
     category_name varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
 CREATE TABLE bills
 (
-    id integer NOT NULL AUTO_INCREMENT,
-    amount Decimal (10,2) NOT NULL,
-   bill_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	id integer NOT NULL AUTO_INCREMENT,
+	amount integer(100) NOT NULL,
     category varchar(255) NOT NULL,
-    spent_at varchar(100) NOT NULL,
-    remarks varchar(255) ,
-    PRIMARY KEY (id)
+	spentAt integer(100) NOT NULL,
+	remarks varchar(255) NOT NULL,
+	paymentMode varchar(100) NOT NULL,
+    billDate timestamp,
+    createdAt timestamp,
+    Uid integer(10) not null,
+	PRIMARY KEY (id)
 );
