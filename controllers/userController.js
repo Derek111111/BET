@@ -45,7 +45,12 @@ app.post("/api/register_user",function(req, result){
 
     var condition= " WHERE user_name = '" + req.body.username + "' AND email_id = '" + req.body.email + "'";
     
-    
+    if(req.body.password !== req.body.checkPassword){
+        console.log("NO PASSWORD");
+        return result.send("The passwords did not match.");
+
+
+    }
     console.log(condition);
 
     //check database for the inserted username and email before creating(no copies)
@@ -60,19 +65,19 @@ app.post("/api/register_user",function(req, result){
 
                 //insert this data into the database as a new user
                 newUser(req,res);
-                result.redirect("/");
+                result.send("Success");
 
             }else{//uhoh this email was already used
 
                 console.log("this email was already used");
-                result.status(404).send({data:"NotValid"});//sends it to the fail method in bet1 for register POST
+                return result.send("This email has already been used.");//sends it to the fail method in bet1 for register POST
 
             } 
         });
         }else{
 
             console.log("not a valid email grrr");
-            result.status(404).send({data:"EmailNotValid"});//let the user know to give a proper email
+            return result.send("Please enter a valid email.");//let the user know to give a proper email
 
         }
 
@@ -112,11 +117,11 @@ function newUser(req,result){
     console.log("this user is not taken, create a new account");
 
     //query for inserting new user
-    bet.createUser(["user_name", "email_id","password"], [req.body.username, req.body.email,req.body.password], function(result) {
+    bet.createUser(["user_name", "email_id","password"], [req.body.username, req.body.email,req.body.password], function(res) {
 
         console.log("successfully made user");
         console.log(result);
-        //result.json({action: "newuser"});//send them to login screen after making new user
+       // result.json({action: "newuser"});//send them to login screen after making new user
         //req.session.userId=result.insertId;
         //console.log("Inserted id:"+result.insertId);
         //req.session.userName=req.body.username;

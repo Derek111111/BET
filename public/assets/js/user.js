@@ -8,7 +8,8 @@ $(function(){
 
             username: $("#username").val().trim(),
             email: $("#email").val().trim(),
-            password: $("#password").val().trim()
+            password: $("#password").val().trim(),
+            checkPassword: $("#confirm-password").val().trim()
 
         };
 
@@ -19,11 +20,17 @@ $(function(){
             data: newUser
 
         }).done(function(result){//data was validated, log them in
+            console.log("DONE");
 
-            console.log(result.action);
+            $("#log-in-warning").text(result);
+            if(result === "Success"){
+                $(".register-text").val("");
+            }
+
         }).fail(function(){//server found a problem with data
 
-            console.log("ERROR: server could not validate data");
+            console.log("FAILURE");
+            $("#log-in-warning").text("Something went wrong, please try again.");
 
         });
 
@@ -53,9 +60,7 @@ $(function(){
             console.log("successful login");
             window.location.assign("/userDashboard");
             
-        }).fail(function(){
-
-            console.log("Something went wrong, maybe this user does not exist");
+        }).fail(function(result){
 
         });
 
@@ -69,5 +74,10 @@ $(function(){
     $(".login").on("click",function(){
         $("#log-in").prop('disabled', true);
     })
+
+    //textbox tracking
+    $(".register-text").on('input propertychange paste', function() {
+        $("#log-in-warning").text("");
+    });
    
 });
